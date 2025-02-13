@@ -37,5 +37,13 @@ pipeline {
 		}
             }
         }
+        stage('execute') {
+            steps {
+                echo 'Excecuting the project JAR file...'
+		dir('Calculator/target'){
+	                bat 'java -jar Calculator-0.0.1-SNAPSHOT.jar'
+		}
+            }
+        }
     }
 }
