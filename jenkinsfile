@@ -1,0 +1,35 @@
+pipeline {
+    agent any  // This tells Jenkins to use any available agent.
+
+    environment {
+        MAVEN_HOME = 'C:\\Grads\\Maven\\apache-maven-3.9.9'  
+        PATH = "${MAVEN_HOME}\\bin;${env.PATH}"  // Add Maven to PATH
+    }
+
+    stages {
+        stage('gitclone') {
+            steps {
+                echo 'Cloning the Git repository...'
+                git 'https://github.com/HanushM/Jenkins-Calculator.git'
+            }
+        }
+        stage('compile') {
+            steps {
+                echo 'Compiling Maven project...'
+                bat 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                echo 'Running tests...'
+                bat 'mvn test'
+            }
+        }
+        stage('package') {
+            steps {
+                echo 'Packaging the Maven project...'
+                bat 'mvn package'
+            }
+        }
+    }
+}
