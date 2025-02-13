@@ -16,19 +16,25 @@ pipeline {
         stage('compile') {
             steps {
                 echo 'Compiling Maven project...'
-                bat 'mvn compile'
+		dir('Calculator'){
+                	bat 'mvn compile'
+		}
             }
         }
         stage('test') {
             steps {
                 echo 'Running tests...'
-                bat 'mvn test'
+		dir('Calculator'){
+                	bat 'mvn test'
+		}
             }
         }
         stage('package') {
             steps {
                 echo 'Packaging the Maven project...'
-                bat 'mvn package'
+		dir('Calculator'){
+	                bat 'mvn package'
+		}
             }
         }
     }
